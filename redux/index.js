@@ -1,9 +1,9 @@
 const redux = require ('redux');
 const {combineReducers, createStore} = redux;
 //import the separate reducers
-const countReducer = require('./count');
-const favoriteThingsReducer = require('./favoriteThings');
-const youtubeVideoReducer = require('./youtubeVideo');
+const {countReducer} = require('./count');
+const {favoriteThingsReducer} = require('./favoriteThings');
+const {youtubeVideoReducer} = require('./youtubeVideo');
 
 //combine the reducers into a single state tree
 const rootReducer = combineReducers({

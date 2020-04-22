@@ -1,18 +1,18 @@
-function addFavoriteThing (thing) {
+exports.addFavoriteThing = function (thing) {
   return {
     type: 'ADD_FAVORITE_THING',
     payload: thing
   }
 }
 
-function removeFavoriteThing (thing) {
+exports.removeFavoriteThing = function (thing) {
   return {
     type: 'REMOVE_FAVORITE_THING',
     payload: thing
   }
 }
 
-function favoriteThingsReducer (favoriteThings = [], action) {
+exports.favoriteThingsReducer = function (favoriteThings = [], action) {
   switch (action.type) {
     case 'ADD_FAVORITE_THING':
       return [...favoriteThings, action.payload]
@@ -22,5 +22,3 @@ function favoriteThingsReducer (favoriteThings = [], action) {
       return favoriteThings;
   }
 }
-
-module.exports = favoriteThingsReducer;

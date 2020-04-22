@@ -1,11 +1,19 @@
 
-function upvoteYoutubeVideo () {
+
+exports.updateYoutubeVideoTitle = function (title) {
+  return {
+    type: 'UPDATE_YOUTUBE_VIDEO_TITLE',
+    payload: title
+  }
+}
+
+exports.upvoteYoutubeVideo = function () {
   return {
     type: 'UPVOTE_YOUTUBE_VIDEO',
   }
 }
 
-function downvoteYoutubeVideo () {
+exports.downvoteYoutubeVideo = function () {
   return {
     type: 'DOWNVOTE_YOUTUBE_VIDEO',
   }
@@ -20,7 +28,7 @@ const initialState = {
   }
 }
 
-function youtubeVideoReducer (youtubeVideo = initialState, action) {
+exports.youtubeVideoReducer = function (youtubeVideo = initialState, action) {
   switch (action.type) {
     case 'UPDATE_YOUTUBE_VIDEO_TITLE':
       return {
@@ -50,5 +58,3 @@ function youtubeVideoReducer (youtubeVideo = initialState, action) {
       return youtubeVideo
   }
 }
-
-module.exports = youtubeVideoReducer;
