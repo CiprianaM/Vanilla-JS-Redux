@@ -34,8 +34,8 @@ function halve () {
   }
 }
 
-//reducer - a function that takes the old state and an action, and returns a new state based on the action type
-//the reducer is a pure function
+// reducer - a function that takes the old state and an action, and returns a new state based on the action type
+// the reducer is a pure function
 function reducer (oldState = {count: 0}, action) {
   switch (action.type) {
     case 'INCREMENT':
@@ -58,3 +58,16 @@ function reducer (oldState = {count: 0}, action) {
       return oldState
   }
 }
+//create store - store comes with 4 methods:
+//1. dispatch
+//2. subscribe
+//3. getState
+//4. replaceReducer
+const store = redux.createStore(reducer);
+console.log(store)
+
+//getState - gets current state of the store
+store.getState()
+
+//logs 0
+console.log(store.getState())
