@@ -1,24 +1,24 @@
 
-export function changeCount (amount = 1) {
+function changeCount (amount = 1) {
   return {
     type: 'CHANGE_COUNT',
     payload: amount
   }
 }
 
-export function double () {
+function double () {
   return {
     type: 'DOUBLE'
   }
 }
 
-export function halve () {
+function halve () {
   return {
     type: 'HALVE'
   }
 }
 
-export default function countReducer (count = 0, action) {
+function countReducer (count = 0, action) {
   switch (action.type) {
     case 'CHANGE_COUNT':
       return count + action.payload
@@ -30,3 +30,5 @@ export default function countReducer (count = 0, action) {
       return count
   }
 }
+
+module.exports = countReducer;

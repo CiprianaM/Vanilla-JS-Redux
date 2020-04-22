@@ -1,11 +1,11 @@
 
-export function upvoteYoutubeVideo () {
+function upvoteYoutubeVideo () {
   return {
     type: 'UPVOTE_YOUTUBE_VIDEO',
   }
 }
 
-export function downvoteYoutubeVideo () {
+function downvoteYoutubeVideo () {
   return {
     type: 'DOWNVOTE_YOUTUBE_VIDEO',
   }
@@ -20,7 +20,7 @@ const initialState = {
   }
 }
 
-export default function youtubeVideoReducer (youtubeVideo = initialState, action) {
+function youtubeVideoReducer (youtubeVideo = initialState, action) {
   switch (action.type) {
     case 'UPDATE_YOUTUBE_VIDEO_TITLE':
       return {
@@ -50,3 +50,5 @@ export default function youtubeVideoReducer (youtubeVideo = initialState, action
       return youtubeVideo
   }
 }
+
+module.exports = youtubeVideoReducer;
