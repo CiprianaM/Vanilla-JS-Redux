@@ -1,5 +1,10 @@
 const redux = require ('redux');
 
+//The 3 principles of Redux:
+//1. The store is the single source of truth (saves the global state)
+//2. State is read-only (it can only be modified through dispatching actions, not directly)
+//3. Changes are made through reducers (which are pure functions)
+
 //action - just an object with property "type". Convention - Capital snake case (ex. INCREASE_NUMBER)
 const action = {
   type: 'INCREMENT'
