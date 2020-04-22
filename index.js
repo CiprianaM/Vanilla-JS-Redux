@@ -12,9 +12,10 @@ const action = {
 
 //action creator - a function which returns the object that is the action
 
-function increment () {
+function increment (amount) {
   return {
-    type: 'INCREMENT'
+    type: 'INCREMENT',
+    payload: amount
   }
 }
 
@@ -40,7 +41,7 @@ function reducer (oldState = {count: 0}, action) {
   switch (action.type) {
     case 'INCREMENT':
       return {
-        count: oldState.count + 1
+        count: oldState.count + action.payload
       }
     case 'DECREMENT':
       return {
@@ -75,4 +76,8 @@ store.subscribe(()=>{
   console.log(store.getState())
 })
 
-store.dispatch({type: 'INCREMENT'})
+//dispatch - dispatches an action to the reducer, which instead determines which state to return based on that action
+store.dispatch({type: 'INCREMENT', payload: 22})
+store.dispatch(increment(3))
+store.dispatch(double())
+store.dispatch(decrement())
