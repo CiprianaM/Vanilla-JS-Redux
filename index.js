@@ -113,7 +113,7 @@ function reducer (state = initialState, action) {
           title: action.payload
         }
       }
-    case 'UPVOTE_YOUTUBE_VIDEO_VOTES': {
+    case 'UPVOTE_YOUTUBE_VIDEO': {
       const {payload} = action;
       return {
         ...state,
@@ -127,7 +127,7 @@ function reducer (state = initialState, action) {
         }
       }
     }
-    case 'DOWNVOTE_YOUTUBE_VIDEO_VOTES':
+    case 'DOWNVOTE_YOUTUBE_VIDEO':
       return {
         ...state,
         youtubeVideo: {
@@ -169,7 +169,7 @@ store.dispatch(addFavoriteThing('more puppers'))
 store.dispatch(addFavoriteThing('snackies'))
 store.dispatch(removeFavoriteThing('kittens'))
 store.dispatch(double())
-store.dispatch(updateYoutubeVideoVotes(-1))
-store.dispatch(updateYoutubeVideoVotes(-1))
-store.dispatch(updateYoutubeVideoVotes(1))
+store.dispatch(downvoteYoutubeVideo())
+store.dispatch(downvoteYoutubeVideo())
+store.dispatch(upvoteYoutubeVideo())
 store.dispatch(updateYoutubeVideoTitle('Its a wonderful life'))
