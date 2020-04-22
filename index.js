@@ -51,10 +51,15 @@ function updateYoutubeVideoTitle (title) {
   }
 }
 
-function updateYoutubeVideoVotes (number) {
+function upvoteYoutubeVideo () {
   return {
-    type: 'UPDATE_YOUTUBE_VIDEO_VOTES',
-    payload: number
+    type: 'UPVOTE_YOUTUBE_VIDEO',
+  }
+}
+
+function downvoteYoutubeVideo () {
+  return {
+    type: 'DOWNVOTE_YOUTUBE_VIDEO',
   }
 }
 
@@ -108,7 +113,7 @@ function reducer (state = initialState, action) {
           title: action.payload
         }
       }
-    case 'UPDATE_YOUTUBE_VIDEO_VOTES': {
+    case 'UPVOTE_YOUTUBE_VIDEO_VOTES': {
       const {payload} = action;
       return {
         ...state,
@@ -116,12 +121,24 @@ function reducer (state = initialState, action) {
           ...state.youtubeVideo,
           votes: {
             ...state.youtubeVideo.votes,
-            up: payload > 0 ? state.youtubeVideo.votes.up + 1 : state.youtubeVideo.votes.up,
-            down: payload < 0 ? state.youtubeVideo.votes.down + 1 : state.youtubeVideo.votes.down
+            up: state.youtubeVideo.votes.up + 1,
+            // down: payload < 0 ? state.youtubeVideo.votes.down + 1 : state.youtubeVideo.votes.down
           }
         }
       }
     }
+    case 'DOWNVOTE_YOUTUBE_VIDEO_VOTES':
+      return {
+        ...state,
+        youtubeVideo: {
+          ...state.youtubeVideo,
+          votes: {
+            ...state.youtubeVideo.votes,
+            down: state.youtubeVideo.votes.down + 1,
+          }
+        }
+    }
+
     default:
       return state
   }
