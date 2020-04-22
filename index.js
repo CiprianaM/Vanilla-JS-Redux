@@ -64,10 +64,15 @@ function reducer (oldState = {count: 0}, action) {
 //3. getState
 //4. replaceReducer
 const store = redux.createStore(reducer);
-console.log(store)
+// console.log(store)
 
 //getState - gets current state of the store
 store.getState()
 
 //logs 0
 console.log(store.getState())
+
+//subscribe - subscribes to an action. takes a function as an argument. this function runs when the store changes
+store.subscribe(()=>{
+  console.log(store.getState())
+})
