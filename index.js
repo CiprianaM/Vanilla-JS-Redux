@@ -26,6 +26,13 @@ function addFavoriteThing (thing) {
   }
 }
 
+function removeFavoriteThing (thing) {
+  return {
+    type: 'REMOVE_FAVORITE_THING',
+    payload: thing
+  }
+}
+
 function double () {
   return {
     type: 'DOUBLE'
@@ -37,9 +44,31 @@ function halve () {
   }
 }
 
+function updateYoutubeVideoTitle (title) {
+  return {
+    type: 'UPDATE_YOUTUBE_VIDEO_TITLE',
+    payload: title
+  }
+}
+
+function updateYoutubeVideoVotes (number) {
+  return {
+    type: 'UPDATE_YOUTUBE_VIDEO_VOTES',
+    payload: number
+  }
+}
+
 const initialState = {
   count: 0,
-  favoriteThings: []
+  favoriteThings: [],
+  youtubeVideo: {
+    title: "",
+    count: 0,
+    votes: {
+      up: 0,
+      down: 0
+    }
+  }
 }
 
 // reducer - a function that takes the old state and an action, and returns a new state based on the action type
@@ -56,6 +85,11 @@ function reducer (state = initialState, action) {
         ...state,
         favoriteThings: [...state.favoriteThings, action.payload]
       }
+    case 'REMOVE_FAVORITE_THING':
+      return {
+        ...state,
+        favoriteThings: state.favoriteThings.filter(elem => elem !== action.payload)
+      }
     case 'DOUBLE':
       return {
         ...state,
@@ -66,6 +100,28 @@ function reducer (state = initialState, action) {
         ...state,
         count: Math.round(state.count/2)
       }
+    case 'UPDATE_YOUTUBE_VIDEO_TITLE':
+      return {
+        ...state,
+        youtubeVideo: {
+          ...state.youtubeVideo,
+          title: action.payload
+        }
+      }
+    case 'UPDATE_YOUTUBE_VIDEO_VOTES': {
+      const {payload} = action;
+      return {
+        ...state,
+        youtubeVideo: {
+          ...state.youtubeVideo,
+          votes: {
+            ...state.youtubeVideo.votes,
+            up: payload > 0 ? state.youtubeVideo.votes.up + 1 : state.youtubeVideo.votes.up,
+            down: payload < 0 ? state.youtubeVideo.votes.down + 1 : state.youtubeVideo.votes.down
+          }
+        }
+      }
+    }
     default:
       return state
   }
@@ -91,4 +147,12 @@ store.subscribe(()=>{
 store.dispatch({type: 'CHANGE_COUNT', payload: 22})
 store.dispatch(changeCount(-53))
 store.dispatch(addFavoriteThing('puppers'))
+store.dispatch(addFavoriteThing('kittens'))
+store.dispatch(addFavoriteThing('more puppers'))
+store.dispatch(addFavoriteThing('snackies'))
+store.dispatch(removeFavoriteThing('kittens'))
 store.dispatch(double())
+store.dispatch(updateYoutubeVideoVotes(-1))
+store.dispatch(updateYoutubeVideoVotes(-1))
+store.dispatch(updateYoutubeVideoVotes(1))
+store.dispatch(updateYoutubeVideoTitle('Its a wonderful life'))
