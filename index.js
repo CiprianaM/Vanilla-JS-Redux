@@ -12,18 +12,20 @@ const action = {
 
 //action creator - a function which returns the object that is the action
 
-function increment (amount) {
+function changeCount (amount) {
   return {
-    type: 'INCREMENT',
+    type: 'CHANGE_COUNT',
     payload: amount
   }
 }
 
-function decrement () {
+function addFavoriteThing (thing) {
   return {
-    type: 'DECREMENT'
+    type: 'ADD_FAVORITE_THING',
+    payload: thing
   }
 }
+
 function double () {
   return {
     type: 'DOUBLE'
@@ -35,28 +37,37 @@ function halve () {
   }
 }
 
+const initialState = {
+  count: 0,
+  favoriteThings: []
+}
+
 // reducer - a function that takes the old state and an action, and returns a new state based on the action type
 // the reducer is a pure function
-function reducer (oldState = {count: 0}, action) {
+function reducer (state = initialState, action) {
   switch (action.type) {
-    case 'INCREMENT':
+    case 'CHANGE_COUNT':
       return {
-        count: oldState.count + action.payload
+        ...state,
+        count: state.count + action.payload
       }
-    case 'DECREMENT':
+    case 'ADD_FAVORITE_THING':
       return {
-        count: oldState.count - 1
+        ...state,
+        favoriteThings: [...state.favoriteThings, action.payload]
       }
     case 'DOUBLE':
       return {
-        count: oldState.count * 2
+        ...state,
+        count: state.count * 2
       }
     case 'HALVE':
       return {
-        count: Math.round(oldState.count/2)
+        ...state,
+        count: Math.round(state.count/2)
       }
     default:
-      return oldState
+      return state
   }
 }
 //create store - store comes with 4 methods:
@@ -77,7 +88,7 @@ store.subscribe(()=>{
 })
 
 //dispatch - dispatches an action to the reducer, which instead determines which state to return based on that action
-store.dispatch({type: 'INCREMENT', payload: 22})
-store.dispatch(increment(3))
+store.dispatch({type: 'CHANGE_COUNT', payload: 22})
+store.dispatch(changeCount(-53))
+store.dispatch(addFavoriteThing('puppers'))
 store.dispatch(double())
-store.dispatch(decrement())
