@@ -67,8 +67,6 @@ const store = redux.createStore(reducer);
 // console.log(store)
 
 //getState - gets current state of the store
-store.getState()
-
 //logs 0
 console.log(store.getState())
 
@@ -76,3 +74,5 @@ console.log(store.getState())
 store.subscribe(()=>{
   console.log(store.getState())
 })
+
+store.dispatch({type: 'INCREMENT'})
