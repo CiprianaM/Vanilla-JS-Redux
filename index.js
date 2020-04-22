@@ -29,6 +29,8 @@ function halve () {
   }
 }
 
+//reducer - a function that takes the old state and an action, and returns a new state based on the action type
+//the reducer is a pure function
 function reducer (oldState = {count: 0}, action) {
   switch (action.type) {
     case 'INCREMENT':
